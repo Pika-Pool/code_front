@@ -1,6 +1,9 @@
 function Sidebar(props) {
 	return (
-		<aside className='h-full bg-red-300' style={{ width: '25%' }}>
+		<aside
+			className={`bg-red-300 ${props.className}`}
+			style={{ width: '25%' }}
+		>
 			<ul className='text-white text-base font-medium rounded-md'>
 				<li className='capitalize p-2 border-b border-red-500 tracking-widest'>
 					Overview
