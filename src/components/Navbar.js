@@ -1,7 +1,7 @@
 function Navbar(props) {
 	return (
 		<nav className='w-full flex justify-between p-4 bg-gray-800'>
-			<h1 className='font-bold uppercase text-xl'>
+			<h1 className='font-bold uppercase text-2xl'>
 				<a className='text-indigo-400' href='/'>
 					App Name
 				</a>
