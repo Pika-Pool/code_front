@@ -7,12 +7,12 @@ class RoutesPage extends React.Component {
 		super(props);
 		this.state = {
 			showAddNewRouteModal: false,
-			newRouteData: null,
 			routePath: '',
 			routeMethod: 'GET',
 		};
 
 		this.onChange = this.onChange.bind(this);
+		this.onCreateNewRoute = this.onCreateNewRoute.bind(this);
 	}
 
 	onChange(event) {
@@ -24,17 +24,27 @@ class RoutesPage extends React.Component {
 		});
 	}
 
+	onCreateNewRoute(newRouteData) {
+		// reset state and send new route data upwards
+		this.setState(
+			{
+				showAddNewRouteModal: false,
+				routePath: '',
+				routeMethod: 'GET',
+			},
+			() => {
+				this.props.addNewRoute(newRouteData);
+			}
+		);
+	}
+
 	render() {
 		return (
 			<div className='m-5'>
+				{/* modal with form to create new route */}
 				{this.state.showAddNewRouteModal ? (
 					<Modal
-						onCreateNewRoute={newRouteData => {
-							this.setState({
-								showAddNewRouteModal: false,
-								newRouteData,
-							});
-						}}
+						onCreateNewRoute={this.onCreateNewRoute}
 						routePath={this.state.routePath}
 						routeMethod={this.state.routeMethod}
 					/>
@@ -93,9 +103,18 @@ class RoutesPage extends React.Component {
 
 				{/* list of current routes */}
 				<div className='space-y-3'>
-					<RouteBlock routeMethod='GET' routePath='/hello' />
-					<RouteBlock routeMethod='GET' routePath='/hello' />
-					<RouteBlock routeMethod='GET' routePath='/hello' />
+					{this.props.routesList.length > 0 ? (
+						this.props.routesList.map(route => (
+							<RouteBlock
+								routeMethod={route.routeMethod}
+								routePath={route.routePath}
+							/>
+						))
+					) : (
+						<div className='text-lg font-semibold'>
+							This app has no routes yet
+						</div>
+					)}
 				</div>
 			</div>
 		);
