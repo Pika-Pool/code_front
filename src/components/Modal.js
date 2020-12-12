@@ -11,10 +11,14 @@ class Modal extends React.Component {
 			routeType: 'render_template',
 			template_path: '',
 			redirect_path: '',
-			json_data_cleaned: '',
-			json_data: '',
-			form_data_cleaned: '',
-			form_data: '',
+			// json_data_user is string entered by user
+			json_data_user: '',
+			// json_data is after removing whitespace from json_data_user
+			json_data: '', // data sent to server
+			// form_data_user is string entered by user
+			form_data_user: '',
+			// from_data is after removing whitespace and splitting form_data_user into an array
+			form_data: '', // data sent to server
 		};
 
 		this.onChange = this.onChange.bind(this);
@@ -25,15 +29,15 @@ class Modal extends React.Component {
 		const key = event.currentTarget.name;
 		let value = event.currentTarget.value;
 
-		if (key === 'json_data') {
+		if (key === 'json_data_user') {
 			this.setState({
 				[key]: value,
-				json_data_cleaned: value.replace(/\s/g, ''),
+				json_data: value.replace(/\s/g, ''),
 			});
-		} else if (key === 'form_data') {
+		} else if (key === 'form_data_user') {
 			this.setState({
 				[key]: value,
-				form_data_cleaned: value.replace(/\s/g, '').split(','),
+				form_data: value.replace(/\s/g, '').split(','),
 			});
 		} else {
 			this.setState({
@@ -48,6 +52,19 @@ class Modal extends React.Component {
 		} else {
 			this.props.onCreateNewRoute(null);
 		}
+
+		// reset data
+		this.setState({
+			routePath: this.props.routePath || '',
+			routeMethod: this.props.routeMethod || 'POST',
+			routeType: 'render_template',
+			template_path: '',
+			redirect_path: '',
+			json_data_user: '',
+			json_data: '',
+			form_data_user: '',
+			form_data: '',
+		});
 	}
 
 	render() {
@@ -148,9 +165,9 @@ class Modal extends React.Component {
 							<label htmlFor='formData'>Form data:</label>
 							<input
 								id='formData'
-								name='form_data'
+								name='form_data_user'
 								onChange={this.onChange}
-								value={this.state.form_data}
+								value={this.state.form_data_user}
 							/>
 						</div>
 
@@ -160,9 +177,9 @@ class Modal extends React.Component {
 								<label htmlFor='jsonData'>JSON data:</label>
 								<textarea
 									id='jsonData'
-									name='json_data'
+									name='json_data_user'
 									onChange={this.onChange}
-									value={this.state.json_data}
+									value={this.state.json_data_user}
 								/>
 							</div>
 						) : (
@@ -172,7 +189,6 @@ class Modal extends React.Component {
 						<div className='buttons'>
 							<button
 								id='cancel'
-								type='submit'
 								name='cancel'
 								onClick={this.onCreateNewRoute}
 							>
