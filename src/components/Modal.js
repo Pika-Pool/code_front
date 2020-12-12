@@ -6,7 +6,7 @@ class Modal extends React.Component {
 		super(props);
 
 		this.state = {
-			routePath: this.props.routePath || '',
+			routePath: this.props.routePath || '/',
 			routeMethod: this.props.routeMethod || 'POST',
 			routeType: 'render_template',
 			template_path: '',
@@ -47,12 +47,17 @@ class Modal extends React.Component {
 	}
 
 	onCreateNewRoute(event) {
-		if (event.currentTarget.id === 'addRoute') {
-			this.props.onCreateNewRoute(this.state);
-		} else {
+		// if cancel button is clicked
+		if (event.currentTarget.id === 'cancel') {
 			this.props.onCreateNewRoute(null);
+			return;
 		}
 
+		if (!this.validateInputFields()) {
+			return;
+		}
+
+		this.props.onCreateNewRoute(this.state);
 		// reset data
 		this.setState({
 			routePath: this.props.routePath || '',
@@ -67,6 +72,16 @@ class Modal extends React.Component {
 		});
 	}
 
+	validateInputFields() {
+		// get all invalid fields
+		// if there are any, do not submit
+		return (
+			this._formElement.querySelectorAll(
+				'input:invalid,select:invalid,textarea:invalid'
+			).length === 0
+		);
+	}
+
 	render() {
 		return (
 			<div className='absolute top-0 left-0 right-0 bottom-0 z-10 flex justify-center items-center'>
@@ -77,6 +92,9 @@ class Modal extends React.Component {
 					<form
 						onSubmit={e => e.preventDefault()}
 						className='space-y-2'
+						ref={el => {
+							this._formElement = el;
+						}}
 					>
 						<div className='input-block'>
 							<label htmlFor='routePath'>Path:</label>
@@ -185,25 +203,23 @@ class Modal extends React.Component {
 						) : (
 							void 0
 						)}
-
-						<div className='buttons'>
-							<button
-								id='cancel'
-								name='cancel'
-								onClick={this.onCreateNewRoute}
-							>
-								Cancel
-							</button>
-							<button
-								id='addRoute'
-								type='submit'
-								name='addRoute'
-								onClick={this.onCreateNewRoute}
-							>
-								Add
-							</button>
-						</div>
 					</form>
+					<div className='buttons'>
+						<button
+							id='cancel'
+							name='cancel'
+							onClick={this.onCreateNewRoute}
+						>
+							Cancel
+						</button>
+						<button
+							id='addRoute'
+							name='addRoute'
+							onClick={this.onCreateNewRoute}
+						>
+							Add
+						</button>
+					</div>
 				</div>
 			</div>
 		);

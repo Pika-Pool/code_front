@@ -17,8 +17,12 @@ class App extends React.Component {
 	}
 
 	addNewRoute(newRoute) {
+		if (!newRoute) return;
+
+		// include only cleaned json_data and form_data
+		const { json_data_user, form_data_user, ...relevantData } = newRoute;
 		const routesList = this.state.routes;
-		routesList.push(newRoute);
+		routesList.push(relevantData);
 		this.setState({ routes: routesList });
 	}
 

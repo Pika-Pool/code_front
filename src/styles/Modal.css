@@ -26,6 +26,12 @@
 	@apply text-lg;
 }
 
+.modal .input-block > input:invalid,
+.modal .input-block > textarea:invalid,
+.modal .input-block > select:invalid {
+	@apply border-red-500;
+}
+
 .modal .input-block > input,
 .modal .input-block > textarea,
 .modal .input-block > select {

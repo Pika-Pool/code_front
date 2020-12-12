@@ -33,7 +33,7 @@ class RoutesPage extends React.Component {
 				routeMethod: 'GET',
 			},
 			() => {
-				this.props.addNewRoute(newRouteData);
+				if (newRouteData) this.props.addNewRoute(newRouteData);
 			}
 		);
 	}
