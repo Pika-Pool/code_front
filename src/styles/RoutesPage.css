@@ -1,0 +1,13 @@
+.new-routes .input-block {
+	@apply w-40;
+}
+
+.new-routes .input-block > input,
+.new-routes .input-block > select {
+	@apply w-full;
+	@apply border-2;
+	@apply border-gray-400;
+	@apply px-2;
+	@apply py-1;
+	@apply rounded-md;
+}

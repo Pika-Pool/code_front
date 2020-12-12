@@ -1,0 +1,63 @@
+.modal {
+	max-width: 600px;
+	width: 70vw;
+
+	@apply p-4;
+	@apply rounded-md;
+}
+
+.modal h3 {
+	@apply text-xl;
+	@apply font-bold;
+	@apply uppercase;
+	@apply text-center;
+	@apply mb-5;
+}
+
+.modal .input-block {
+	@apply grid;
+	@apply grid-cols-2;
+	@apply justify-items-start;
+	@apply items-baseline;
+}
+
+.modal .input-block > label {
+	@apply font-semibold;
+	@apply text-lg;
+}
+
+.modal .input-block > input,
+.modal .input-block > textarea,
+.modal .input-block > select {
+	@apply w-full;
+	@apply border-2;
+	@apply border-solid;
+	@apply border-gray-500;
+	@apply py-1;
+	@apply px-2;
+	@apply rounded-md;
+}
+
+.modal .buttons {
+	@apply flex;
+	@apply justify-between;
+	@apply mt-5;
+	@apply px-4;
+}
+
+.modal .buttons > * {
+	@apply p-2;
+	@apply w-44;
+	@apply uppercase;
+	@apply rounded-full;
+	@apply text-white;
+	@apply cursor-pointer;
+}
+
+.modal .buttons #cancel {
+	@apply bg-gray-400;
+}
+
+.modal .buttons #addRoute {
+	@apply bg-blue-500;
+}

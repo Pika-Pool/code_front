@@ -2,8 +2,9 @@ import '../styles/Box.css';
 
 function Box(props) {
 	return (
-		<div className={`Box bg-gray-800 rounded-lg p-3 ${props.className}`}>
-			{props.children}
+		<div className={`Box ${props.className}`}>
+			<h2>{props.heading}</h2>
+			<div className='space-y-2 pl-3'>{props.children}</div>
 		</div>
 	);
 }

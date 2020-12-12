@@ -1,15 +1,15 @@
 function Sidebar(props) {
 	return (
 		<aside
-			className={`bg-red-300 ${props.className}`}
+			className={`bg-gray-800 self-stretch ${props.className}`}
 			style={{ width: '25%' }}
 		>
 			<ul className='text-white text-base font-medium rounded-md'>
-				<li className='capitalize p-2 border-b border-red-500 tracking-widest'>
-					Overview
+				<li className='capitalize p-2 border-b-2 border-indigo-400 tracking-widest'>
+					<a href='/overview'>Overview</a>
 				</li>
-				<li className='capitalize p-2 border-b border-red-500 tracking-widest'>
-					Routes
+				<li className='capitalize p-2 border-b-2 border-indigo-400 tracking-widest'>
+					<a href='/routes'>Routes</a>
 				</li>
 			</ul>
 		</aside>

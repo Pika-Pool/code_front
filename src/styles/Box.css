@@ -1,24 +1,42 @@
-.Box > h2,
-.Box > h3,
-.Box > h4 {
+.Box {
+	@apply bg-gray-800;
+	@apply rounded-lg;
+	@apply p-5;
+	@apply text-gray-200;
+}
+
+.Box h2,
+.Box h3,
+.Box h4 {
 	@apply text-red-100;
 	@apply mb-2;
 	@apply font-semibold;
 }
 
-.Box > h2 {
+.Box h2 {
 	@apply text-xl;
+	@apply mb-3;
 }
 
-.Box > h3 {
+.Box h3 {
 	@apply text-lg;
 }
 
-.Box > h4 {
+.Box h4 {
 	@apply text-base;
 }
 
-.Box > p {
-	@apply text-gray-200;
+.Box p {
 	@apply text-sm;
+}
+
+.Box code {
+	@apply block;
+	@apply p-2;
+	@apply bg-black;
+}
+
+.Box code::before {
+	content: '$';
+	@apply mr-2;
 }
