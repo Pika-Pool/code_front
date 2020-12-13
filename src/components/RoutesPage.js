@@ -13,6 +13,7 @@ class RoutesPage extends React.Component {
 
 		this.onChange = this.onChange.bind(this);
 		this.onCreateNewRoute = this.onCreateNewRoute.bind(this);
+		this.onRouteBlockClick = this.onRouteBlockClick.bind(this);
 	}
 
 	onChange(event) {
@@ -38,12 +39,20 @@ class RoutesPage extends React.Component {
 		);
 	}
 
-	onDelete(event) {
-		if (!event.key) {
-			return;
-		}
+	onRouteBlockClick(key) {
+		return function (event) {
+			if (key) {
+				if (event.target.id === 'deleteRoute') {
+					this.onDelete(key);
+				} else if (event.target.id === 'editRoute') {
+					return; // TODO
+				}
+			}
+		}.bind(this);
+	}
 
-		this.props.deleteRoute(event.key);
+	onDelete(key) {
+		this.props.deleteRoute(key);
 	}
 
 	render() {
@@ -117,6 +126,8 @@ class RoutesPage extends React.Component {
 								routeMethod={route.request_method}
 								routePath={route.path}
 								key={route.id}
+								routeId={route.id}
+								onClick={this.onRouteBlockClick}
 							/>
 						))
 					) : (
@@ -132,7 +143,10 @@ class RoutesPage extends React.Component {
 
 function RouteBlock(props) {
 	return (
-		<div className='w-full flex rounded-sm overflow-hidden items-center ring-2 ring-gray-300'>
+		<div
+			className='w-full flex rounded-sm overflow-hidden items-center ring-2 ring-gray-300'
+			onClick={props.onClick(props.routeId)}
+		>
 			<div className='method py-3 px-5 bg-blue-200 font-semibold'>
 				{props.routeMethod}
 			</div>
@@ -143,7 +157,10 @@ function RouteBlock(props) {
 			<button className='edit hover:bg-yellow-500 self-stretch p-2'>
 				Edit
 			</button>
-			<button className='delete hover:bg-red-500 self-stretch p-2 '>
+			<button
+				className='delete hover:bg-red-500 self-stretch p-2'
+				id='deleteRoute'
+			>
 				Del
 			</button>
 		</div>
