@@ -82,11 +82,9 @@ class App extends React.Component {
 		const { json_data_user, form_data_user, ...relevantData } = newRoute;
 		relevantData.id = uuid.v4();
 
-		const routesList = this.state.routes;
-		routesList.push(relevantData);
-		this.setState({ routes: routesList }, () => {
-			socket.emit('appJsonData', JSON.stringify(this.state));
-		});
+		const newRoutesList = this.state.routes;
+		newRoutesList.push(relevantData);
+		this.saveAndSendToServer(newRoutesList);
 	}
 
 	deleteRoute(routeId) {
@@ -97,7 +95,11 @@ class App extends React.Component {
 			return true;
 		});
 
-		this.setState({ routes: newRoutesList }, () => {
+		this.saveAndSendToServer(newRoutesList);
+	}
+
+	saveAndSendToServer(routesList) {
+		this.setState({ routes: routesList }, () => {
 			socket.emit('appJsonData', JSON.stringify(this.state));
 		});
 	}
