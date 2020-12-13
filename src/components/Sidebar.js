@@ -5,11 +5,17 @@ function Sidebar(props) {
 			style={{ width: '25%' }}
 		>
 			<ul className='text-white text-base font-medium rounded-md'>
-				<li className='capitalize p-3 pl-5 border-b-2 border-indigo-400 tracking-widest'>
-					<a href='/overview'>Overview</a>
+				<li
+					className='capitalize p-3 pl-5 border-b-2 border-indigo-400 tracking-widest cursor-pointer'
+					onClick={() => props.onChangePageView('overview')}
+				>
+					<div>Overview</div>
 				</li>
-				<li className='capitalize p-3 pl-5 border-b-2 border-indigo-400 tracking-widest'>
-					<a href='/routes'>Routes</a>
+				<li
+					className='capitalize p-3 pl-5 border-b-2 border-indigo-400 tracking-widest cursor-pointer'
+					onClick={() => props.onChangePageView('routes')}
+				>
+					<div>Routes</div>
 				</li>
 			</ul>
 		</aside>
