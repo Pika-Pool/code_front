@@ -53,13 +53,14 @@ class App extends React.Component {
 			})
 			.on('error', err => console.log(err))
 			.on('disconnect', reason => {
+				this.setState({connectionStatus: false});
 				if (
 					reason === 'io server disconnect' ||
 					reason === 'io client disconnect'
 				) {
 					// the disconnection was initiated by the server/client
 					// do not reconnect
-					console.log('io server disconnect');
+					console.log('io server disconnect');				
 					return;
 				}
 				socket.connect();
@@ -72,6 +73,8 @@ class App extends React.Component {
 	}
 
 	addNewRoute(newRoute) {
+		if(!this.state.connectionStatus) return;
+		
 		if (!newRoute) return;
 
 		// include only cleaned json_data and form_data
@@ -86,6 +89,8 @@ class App extends React.Component {
 	}
 
 	deleteRoute(id) {
+		if(!this.state.connectionStatus) return;
+		
 		const newRoutesList = this.state.routes.filter(route => {
 			if (route.key === id) return false;
 			return true;
