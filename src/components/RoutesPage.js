@@ -38,6 +38,14 @@ class RoutesPage extends React.Component {
 		);
 	}
 
+	onDelete(event) {
+		if (!event.key) {
+			return;
+		}
+
+		this.props.deleteRoute(event.key);
+	}
+
 	render() {
 		return (
 			<div className='m-5'>
@@ -108,6 +116,7 @@ class RoutesPage extends React.Component {
 							<RouteBlock
 								routeMethod={route.routeMethod}
 								routePath={route.routePath}
+								key={route.id}
 							/>
 						))
 					) : (

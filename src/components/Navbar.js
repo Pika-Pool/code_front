@@ -3,7 +3,7 @@ function Navbar(props) {
 		<nav className='w-full flex justify-between p-4 bg-gray-800 border-b-4 border-indigo-800'>
 			<h1 className='font-bold uppercase text-2xl'>
 				<a className='text-indigo-400' href='/'>
-					App Name
+					Code Front
 				</a>
 			</h1>
 			<div className='status'>

@@ -6,6 +6,7 @@ import OverviewPage from './OverviewPage.js';
 
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import * as uuid from 'uuid';
 
 class App extends React.Component {
 	constructor(props) {
@@ -21,9 +22,21 @@ class App extends React.Component {
 
 		// include only cleaned json_data and form_data
 		const { json_data_user, form_data_user, ...relevantData } = newRoute;
+		relevantData.id = uuid.v4();
+
 		const routesList = this.state.routes;
 		routesList.push(relevantData);
 		this.setState({ routes: routesList });
+	}
+
+	deleteRoute(id) {
+		const newRoutesList = this.state.routes.map(route => {
+			if (route.key === id) return;
+
+			return route;
+		});
+
+		this.setState({ routes: newRoutesList });
 	}
 
 	render() {

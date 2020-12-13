@@ -22,14 +22,14 @@ function OverviewPage(props) {
 				<code>cd Destination/{props.appName}</code>
 
 				<p>Start your server locally</p>
-				<code>django start</code>
+				<code>python manage.py startserver</code>
 			</Box>
 		</div>
 	);
 }
 
 OverviewPage.defaultProps = {
-	appName: 'App Name',
+	appName: 'TodoApp',
 	appVersion: '1.0.0',
 };
 
