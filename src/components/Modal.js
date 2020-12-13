@@ -6,10 +6,10 @@ class Modal extends React.Component {
 		super(props);
 
 		this.state = {
-			routePath: this.props.routePath || '/',
-			routeMethod: this.props.routeMethod || 'POST',
-			routeType: 'render_template',
-			template_path: '',
+			path: this.props.routePath || '/',
+			request_method: this.props.routeMethod || 'POST',
+			type: 'render_template',
+			render_path: '',
 			redirect_path: '',
 			// json_data_user is string entered by user
 			json_data_user: '',
@@ -60,10 +60,10 @@ class Modal extends React.Component {
 		this.props.onCreateNewRoute(this.state);
 		// reset data
 		this.setState({
-			routePath: this.props.routePath || '',
-			routeMethod: this.props.routeMethod || 'POST',
-			routeType: 'render_template',
-			template_path: '',
+			path: this.props.routePath || '',
+			request_method: this.props.routeMethod || 'POST',
+			type: 'render_template',
+			render_path: '',
 			redirect_path: '',
 			json_data_user: '',
 			json_data: '',
@@ -101,9 +101,9 @@ class Modal extends React.Component {
 								<label htmlFor='routePath'>Path:</label>
 								<input
 									id='routePath'
-									name='routePath'
+									name='path'
 									onChange={this.onChange}
-									value={this.state.routePath}
+									value={this.state.path}
 									required
 								/>
 							</div>
@@ -111,9 +111,9 @@ class Modal extends React.Component {
 								<label htmlFor='routeMethod'>Method:</label>
 								<select
 									id='routeMethod'
-									name='routeMethod'
+									name='request_method'
 									onChange={this.onChange}
-									value={this.state.routeMethod}
+									value={this.state.request_method}
 									required
 								>
 									<option value='GET'>GET</option>
@@ -126,9 +126,9 @@ class Modal extends React.Component {
 								<label htmlFor='routeType'>Type:</label>
 								<select
 									id='routeType'
-									name='routeType'
+									name='type'
 									onChange={this.onChange}
-									value={this.state.routeType}
+									value={this.state.type}
 									required
 								>
 									<option value='render_template'>
@@ -140,7 +140,7 @@ class Modal extends React.Component {
 							</div>
 
 							{/* template path */}
-							{this.state.routeType === 'render_template' ? (
+							{this.state.type === 'render_template' ? (
 								<div className='input-block'>
 									<label htmlFor='templatePath'>
 										Template Path:
@@ -148,9 +148,9 @@ class Modal extends React.Component {
 									<input
 										type='text'
 										id='templatePath'
-										name='template_path'
+										name='render_path'
 										onChange={this.onChange}
-										value={this.state.template_path}
+										value={this.state.render_path}
 										required
 									/>
 									<small>
@@ -163,7 +163,7 @@ class Modal extends React.Component {
 							)}
 
 							{/* redirect path */}
-							{this.state.routeType === 'redirect' ? (
+							{this.state.type === 'redirect' ? (
 								<div className='input-block'>
 									<label htmlFor='redirectPath'>
 										Redirect Path:
@@ -192,7 +192,7 @@ class Modal extends React.Component {
 							</div>
 
 							{/* json data */}
-							{this.state.routeType !== 'redirect' ? (
+							{this.state.type !== 'redirect' ? (
 								<div className='input-block'>
 									<label htmlFor='jsonData'>JSON data:</label>
 									<textarea
