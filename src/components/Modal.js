@@ -29,7 +29,15 @@ class Modal extends React.Component {
 		const key = event.currentTarget.name;
 		let value = event.currentTarget.value;
 
-		if (key === 'json_data_user') {
+		if (key === 'path') {
+			if (value[0] !== '/') {
+				value = '/' + value;
+			}
+
+			this.setState({
+				[key]: value,
+			});
+		} else if (key === 'json_data_user') {
 			this.setState({
 				[key]: value,
 				json_data: value.replace(/\s/g, ''),
