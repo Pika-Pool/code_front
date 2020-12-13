@@ -114,8 +114,8 @@ class RoutesPage extends React.Component {
 					{this.props.routesList.length > 0 ? (
 						this.props.routesList.map(route => (
 							<RouteBlock
-								routeMethod={route.routeMethod}
-								routePath={route.routePath}
+								routeMethod={route.request_method}
+								routePath={route.path}
 								key={route.id}
 							/>
 						))
